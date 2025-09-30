@@ -1,0 +1,51 @@
+<div class="no-select" style="margin-top: 40px">
+  <form [formGroup]="frmListadoClientes">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input
+            type="text"
+            formControlName="nombreCliente"
+            class="form-control"
+            placeholder="Nombre del cliente..."
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <button type="button" title="Registrar nuevo cliente" class="btn btn-primary mb-2">
+          Nuevo registro
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="row" style="margin-top: 30px">
+    <div class="col-sm-12">
+      <table class="table">
+        <thead class="thead-light">
+          <tr class="encabezado-tabla">
+            <th scope="col">Identificación</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col" translate="no">Email</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <i class="bi bi-pencil-square icon-edit" title="Editar cliente"></i>
+              <i class="bi bi-trash icon-delete" title="Eliminar cliente"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

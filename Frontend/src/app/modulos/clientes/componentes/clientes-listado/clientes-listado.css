@@ -1,0 +1,27 @@
+.encabezado-tabla th {
+  background-color: #f0f0f0;
+  color: #333;
+  font-weight: 500;
+}
+
+.icon-edit {
+  color: #0d6efd;
+  margin-right: 10px;
+}
+
+.icon-delete {
+  color: #ff4d4f;
+}
+
+.icon-edit,
+.icon-delete {
+  cursor: pointer;
+  font-size: 20px;
+  display: inline-block;
+  transition: 0.2s;
+}
+
+.icon-edit:hover,
+.icon-:hover {
+  transform: scale(1.3);
+}
