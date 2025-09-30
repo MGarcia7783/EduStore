@@ -34,7 +34,7 @@ Asegúrate de tener instalado lo siguiente:
 
 1.  Clona el repositorio:
     ```bash
-    git clone https://github.com/MGarcia7783/edustore-app.git
+    git clone https://github.com/MGarcia7783/edustore.git
     ```
 2.  Navega al directorio del proyecto:
     ```bash
