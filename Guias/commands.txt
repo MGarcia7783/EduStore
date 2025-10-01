@@ -1,4 +1,6 @@
 
 npm install bootstrap
-
 npm install bootstrap-icons
+
+npm init -y
+npm install json-server --save-dev
