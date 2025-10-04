@@ -14,7 +14,12 @@
       </div>
 
       <div class="col-sm-6">
-        <button type="button" title="Registrar nuevo cliente" class="btn btn-primary mb-2">
+        <button
+          type="button"
+          title="Registrar nuevo cliente"
+          class="btn btn-primary mb-2"
+          (click)="modalClientes.abrirModal()"
+        >
           Nuevo registro
         </button>
       </div>
@@ -36,7 +41,7 @@
         <tbody>
           @for(cliente of clientes; track cliente.idCliente) {
           <tr>
-            <th>{{ cliente.identificacion }}</th>
+            <th style="font-weight: normal">{{ cliente.identificacion }}</th>
             <td>{{ cliente.nombreCliente }}</td>
             <td>{{ cliente.telefono }}</td>
             <td>{{ cliente.email }}</td>
@@ -51,3 +56,5 @@
     </div>
   </div>
 </div>
+
+<app-clientes-registro #modalClientes></app-clientes-registro>

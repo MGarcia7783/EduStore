@@ -4,12 +4,9 @@ export class Clientes {
     public nombreCliente: string,
     public telefono: string,
     public email: string,
-    public clave: string
-  ) {
-    if (telefono.length < 8 || telefono.length > 12) {
-      throw new Error('El número de teléfono debe tener entre 8 y 12 dígitos.');
-    }
-  }
+    public clave: string,
+    public confirmarClave: string
+  ) {  }
 
   emailValido(): boolean {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -19,5 +16,9 @@ export class Clientes {
   claveSegura(): boolean {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return regex.test(this.clave);
+  }
+
+  clavesCoinciden(): boolean {
+    return this.clave === this.confirmarClave;
   }
 }

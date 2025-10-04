@@ -1,0 +1,204 @@
+<div class="no-select">
+  <div
+    class="modal fade"
+    #modalClientes
+    id="modalClientesCenter"
+    tabindex="-1"
+    aria-labelledby="modalClientesCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white py-3">
+          <h5 class="modal-title"><i class="bi bi-person-fill-add me-2"></i>Registro de Cliente</h5>
+        </div>
+        <div class="modal-body p-4">
+          <form [formGroup]="frmClientesRegistro">
+            <div class="row">
+              <div class="col-md-6 border-end pe-4">
+                <h6 class="text-primary mb-4">
+                  <i class="bi bi-person-vcard me-2"> Datos Personales</i>
+                </h6>
+                <div class="mb-3">
+                  <label for="identificacion">Identificación</label>
+                  <input
+                    type="text"
+                    formControlName="identificacion"
+                    class="form-control"
+                    autocomplete="off"
+                    [ngClass]="{
+                      'is-invalid': fm['identificacion'].invalid && fm['identificacion'].touched
+                    }"
+                  />
+                  @if (fm['identificacion'].invalid && fm['identificacion'].touched) {
+                  <div class="invalid-feedback">
+                    @if (fm['identificacion'].errors?.['required']) {
+                    <div>La identificación es requerida</div>
+                    } @if (fm['identificacion'].hasError('minlength')) {
+                    <div>
+                      La identificación debe tener como mínimo
+                      {{ fm['identificacion'].getError('minlength').requiredLength }} caracteres.
+                    </div>
+                    } @if (fm['identificacion'].hasError('maxlength')) {
+                    <div>
+                      La identificación no debe exceder los
+                      {{ fm['identificacion'].getError('maxlength').requiredLength }} caracteres.
+                    </div>
+                    }
+                  </div>
+                  }
+                </div>
+
+                <div class="mb-3">
+                  <label for="nombre">Nombre Completo</label>
+                  <input
+                    type="text"
+                    formControlName="nombreCliente"
+                    class="form-control"
+                    autocomplete="off"
+                    [ngClass]="{
+                      'is-invalid': fm['nombreCliente'].invalid && fm['nombreCliente'].touched
+                    }"
+                  />
+                  @if (fm['nombreCliente'].invalid && fm['nombreCliente'].touched) {
+                  <div class="invalid-feedback">
+                    @if (fm['nombreCliente'].errors?.['required']) {
+                    <div>El nombre es requerido</div>
+                    } @if (fm['nombreCliente'].hasError('minlength')) {
+                    <div>
+                      El nombre debe tener como mínimo
+                      {{ fm['nombreCliente'].getError('minlength').requiredLength }} caracteres.
+                    </div>
+                    } @if (fm['nombreCliente'].hasError('maxlength')) {
+                    <div>
+                      El nombre no debe exceder los
+                      {{ fm['nombreCliente'].getError('maxlength').requiredLength }} caracteres.
+                    </div>
+                    }
+                  </div>
+                  }
+                </div>
+
+                <div class="mb-3">
+                  <label for="telefono">Teléfono</label>
+                  <input
+                    type="text"
+                    formControlName="telefono"
+                    class="form-control"
+                    autocomplete="off"
+                    [ngClass]="{
+                      'is-invalid': fm['telefono'].invalid && fm['telefono'].touched
+                    }"
+                  />
+                  @if (fm['telefono'].invalid && fm['telefono'].touched) {
+                  <div class="invalid-feedback">
+                    @if (fm['telefono'].errors?.['required']) {
+                    <div>El teléfono es requerido</div>
+                    } @if (fm['telefono'].hasError('minlength')) {
+                    <div>
+                      El teléfono debe tener como mínimo
+                      {{ fm['telefono'].getError('minlength').requiredLength }} caracteres.
+                    </div>
+                    } @if (fm['telefono'].hasError('maxlength')) {
+                    <div>
+                      El teléfono no debe exceder los
+                      {{ fm['telefono'].getError('maxlength').requiredLength }} caracteres.
+                    </div>
+                    }
+                  </div>
+                  }
+                </div>
+              </div>
+
+              <div class="col-md-6 ps-4">
+                <h6 class="text-primary mb-4">
+                  <i class="bi bi-person-fill-lock me-2"> Infomación de Acceso</i>
+                </h6>
+                <div class="mb-3">
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    formControlName="email"
+                    class="form-control"
+                    autocomplete="off"
+                    placeholder="Ej: email@example.com"
+                    [ngClass]="{
+                      'is-invalid': fm['email'].invalid && fm['email'].touched
+                    }"
+                  />
+                  @if (fm['email'].invalid && fm['email'].touched) {
+                  <div class="invalid-feedback">
+                    @if (fm['email'].errors?.['required']) {
+                    <div>El teléfono es requerido</div>
+                    } @if (fm['email'].hasError('pattern')) {
+                    <div>El email es inválido. Ejemplo: email@examplo.com</div>
+                    }
+                  </div>
+                  }
+                </div>
+
+                <div class="mb-3">
+                  <label for="clave">Contraseña</label>
+                  <input
+                    type="password"
+                    formControlName="clave"
+                    class="form-control"
+                    autocomplete="off"
+                    [ngClass]="{
+                      'is-invalid': fm['clave'].invalid && fm['clave'].touched
+                    }"
+                  />
+                  @if (fm['clave'].invalid && fm['clave'].touched) {
+                  <div class="invalid-feedback">
+                    @if (fm['clave'].errors?.['required']) {
+                    <div>La contraseña es requerida</div>
+                    } @if (fm['clave'].hasError('pattern')) {
+                    <div>
+                      La contraseña debe contener almenos 8 caracteres, una letra mayúscula, una
+                      letra minúscula, un número y un caracter especial
+                    </div>
+                    }
+                  </div>
+                  }
+                </div>
+
+                <div class="mb-3">
+                  <label for="confirmarClave">Confirmar Contraseña</label>
+                  <input
+                    type="password"
+                    formControlName="confirmarClave"
+                    class="form-control"
+                    autocomplete="off"
+                    [ngClass]="{
+                      'is-invalid':
+                        (fm['confirmarClave'].invalid && fm['confirmarClave'].touched) ||
+                        frmClientesRegistro.hasError('noCoincide')
+                    }"
+                  />
+                  @if ((fm['confirmarClave'].invalid && fm['confirmarClave'].touched) ||
+                  frmClientesRegistro.hasError('noCoincide')) {
+                  <div class="invalid-feedback">
+                    @if (fm['confirmarClave'].errors?.['required']) {
+                    <div>La confirmación de contraseña es requerida</div>
+                    } @if (frmClientesRegistro.hasError('noCoincide')) {
+                    <div>Las contraseñas no coinciden</div>
+                    }
+                  </div>
+                  }
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">
+              <i class="bi bi-save me-2"></i>Guardar
+            </button>
+            <button type="button" class="btn btn-danger" (click)="cerrarModal()">
+              <i class="bi bi-x-circle me-2"></i>Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

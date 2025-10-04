@@ -22,6 +22,6 @@
 }
 
 .icon-edit:hover,
-.icon-:hover {
+.icon-delete:hover {
   transform: scale(1.3);
 }
