@@ -7,3 +7,5 @@ npm install json-server --save-dev
 
 npm install ngx-toastr --save
 npm install @angular/animations --save --force
+
+npm install sweetalert2

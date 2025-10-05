@@ -1,5 +1,5 @@
 export interface IClientes {
-  idCliente?: number;
+  id?: string;
   identificacion: string;
   nombreCliente: string;
   telefono: string;

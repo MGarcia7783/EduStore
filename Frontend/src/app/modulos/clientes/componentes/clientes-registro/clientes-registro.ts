@@ -1,4 +1,4 @@
-import { group } from '@angular/animations';
+import { IClientes } from './../../modelos/iclientes';
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import {
@@ -10,6 +10,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Clientes } from '../../modelos/clientes.modelos';
+import { ToastrService } from 'ngx-toastr';
+import { ClienteService } from '../../servicios/cliente.service';
 
 declare var bootstrap: any;
 
@@ -23,6 +25,8 @@ export class ClientesRegistro implements AfterViewInit, OnInit {
   @ViewChild('modalClientes') modalRef!: ElementRef;
   private fb = inject(FormBuilder);
   private modalInstance: any;
+  private toastr = inject(ToastrService);
+  private clienteService = inject(ClienteService);
 
   public frmClientesRegistro: FormGroup = this.fb.group({
     identificacion: new FormControl(''),
@@ -40,7 +44,7 @@ export class ClientesRegistro implements AfterViewInit, OnInit {
   createFormClientes() {
     this.frmClientesRegistro = this.fb.group(
       {
-        idCliente: [null],
+        id: [null],
         identificacion: [
           '',
           [Validators.required, Validators.minLength(12), Validators.maxLength(20)],
@@ -55,9 +59,7 @@ export class ClientesRegistro implements AfterViewInit, OnInit {
           '',
           [
             Validators.required,
-            Validators.pattern(
-              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
-            ),
+            Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/),
           ],
         ],
         confirmarClave: ['', Validators.required],
@@ -94,5 +96,65 @@ export class ClientesRegistro implements AfterViewInit, OnInit {
   cerrarModal() {
     this.frmClientesRegistro.reset();
     this.modalInstance.hide();
+  }
+
+  //Método para grabar un nuevo registro
+  guardarRegistro() {
+    if (this.frmClientesRegistro.invalid) {
+      this.frmClientesRegistro.markAllAsTouched();
+      this.toastr.warning('Completar todos los campos obligatorios.', 'Validación', {
+        timeOut: 5000,
+      });
+      return;
+    }
+
+    const iCliente: IClientes = {
+      id: this.fm['id'].value,
+      identificacion: this.fm['identificacion'].value,
+      nombreCliente: this.fm['nombreCliente'].value,
+      telefono: this.fm['telefono'].value,
+      email: this.fm['email'].value,
+      clave: this.fm['clave'].value,
+    };
+
+    //Nuevo registro
+    if (!iCliente.id) {
+      delete (iCliente as any).id;
+      this.clienteService.guardarRegistro(iCliente).subscribe({
+        next: () => {
+          this.clienteService.notificarActualizacion();
+          this.toastr.success('Registro almacenado con éxito!', 'Registro');
+          this.cerrarModal();
+        },
+        error: () => {
+          this.toastr.error('Error al crear el registro', 'Error', { timeOut: 5000 });
+        },
+      });
+      //Editar registro
+    } else {
+      if (iCliente.id) {
+        this.clienteService.actualizarRegistro(iCliente.id, iCliente).subscribe({
+          next: () => {
+            this.clienteService.notificarActualizacion();
+            this.toastr.success('Registro actualizado con éxito!', 'Actualización');
+            this.cerrarModal();
+          },
+          error: () => {
+            this.toastr.error('Error al actualizar el registro', 'Error', { timeOut: 5000 });
+          },
+        });
+      }
+    }
+  }
+
+  // Cargar datos
+  cargarDatos(iCliente: IClientes) {
+    this.frmClientesRegistro.patchValue({
+      id: iCliente.id,
+      identificacion: iCliente.identificacion,
+      nombreCliente: iCliente.nombreCliente,
+      telefono: iCliente.telefono,
+      email: iCliente.email,
+    });
   }
 }

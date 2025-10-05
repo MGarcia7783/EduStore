@@ -23,6 +23,13 @@ export const CLIENTES_ROUTERS: Routes = [
             (c) => c.ClientesRegistro
           ),
       },
+      {
+        path: 'registro/id',
+        loadComponent: () =>
+          import('../componentes/clientes-registro/clientes-registro').then(
+            (c) => c.ClientesRegistro
+          ),
+      },
     ],
   },
 ];
