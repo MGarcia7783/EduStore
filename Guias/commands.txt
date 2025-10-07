@@ -9,3 +9,5 @@ npm install ngx-toastr --save
 npm install @angular/animations --save --force
 
 npm install sweetalert2
+
+npm install ngx-bootstrap --save

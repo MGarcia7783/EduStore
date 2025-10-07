@@ -26,6 +26,8 @@
                     formControlName="identificacion"
                     class="form-control"
                     autocomplete="off"
+                    (keydown.enter)="pasarFocus($event)"
+                    #input
                     [ngClass]="{
                       'is-invalid': fm['identificacion'].invalid && fm['identificacion'].touched
                     }"
@@ -56,6 +58,8 @@
                     formControlName="nombreCliente"
                     class="form-control"
                     autocomplete="off"
+                    (keydown.enter)="pasarFocus($event)"
+                    #input
                     [ngClass]="{
                       'is-invalid': fm['nombreCliente'].invalid && fm['nombreCliente'].touched
                     }"
@@ -86,6 +90,8 @@
                     formControlName="telefono"
                     class="form-control"
                     autocomplete="off"
+                    (keydown.enter)="pasarFocus($event)"
+                    #input
                     [ngClass]="{
                       'is-invalid': fm['telefono'].invalid && fm['telefono'].touched
                     }"
@@ -122,6 +128,8 @@
                     class="form-control"
                     autocomplete="off"
                     placeholder="Ej: email@example.com"
+                    (keydown.enter)="pasarFocus($event)"
+                    #input
                     [ngClass]="{
                       'is-invalid': fm['email'].invalid && fm['email'].touched
                     }"
@@ -144,6 +152,8 @@
                     formControlName="clave"
                     class="form-control"
                     autocomplete="off"
+                    (keydown.enter)="pasarFocus($event)"
+                    #input
                     [ngClass]="{
                       'is-invalid': fm['clave'].invalid && fm['clave'].touched
                     }"
@@ -169,6 +179,8 @@
                     formControlName="confirmarClave"
                     class="form-control"
                     autocomplete="off"
+                    (keydown.enter)="pasarFocus($event)"
+                    #input
                     [ngClass]="{
                       'is-invalid':
                         (fm['confirmarClave'].invalid && fm['confirmarClave'].touched) ||

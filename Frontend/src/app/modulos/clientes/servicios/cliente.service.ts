@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environments';
-import { Observable, Subject } from 'rxjs';
+import { map, Observable, Subject } from 'rxjs';
 import { IClientes } from '../modelos/iclientes';
 
 @Injectable({
@@ -31,6 +31,18 @@ export class ClienteService {
   eliminarRegistro(id: string): Observable<IClientes> {
     const url_local = `${this.url}/${id}`
     return this.httpClient.delete<IClientes>(url_local)
+  }
+
+  buacarPorNombre(nombre: string): Observable<IClientes[]> {
+    const url_local = `${this.url}`
+
+    return this.httpClient.get<IClientes[]>(url_local).pipe(
+      map(clientes =>
+        clientes.filter(c =>
+          c.nombreCliente.toLowerCase().includes(nombre.toLowerCase())
+        )
+      )
+    );
   }
 
   notificarActualizacion(): void {

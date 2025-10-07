@@ -1,6 +1,15 @@
 import { IClientes } from './../../modelos/iclientes';
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  inject,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -23,6 +32,8 @@ declare var bootstrap: any;
 })
 export class ClientesRegistro implements AfterViewInit, OnInit {
   @ViewChild('modalClientes') modalRef!: ElementRef;
+  @ViewChildren('input') inputs!: QueryList<ElementRef>;
+
   private fb = inject(FormBuilder);
   private modalInstance: any;
   private toastr = inject(ToastrService);
@@ -38,6 +49,11 @@ export class ClientesRegistro implements AfterViewInit, OnInit {
 
   ngAfterViewInit(): void {
     this.modalInstance = new bootstrap.Modal(this.modalRef.nativeElement);
+
+    // Escuchar el cierre del modal
+    this.modalRef.nativeElement.addEventListener('hidden.bs.modal', () => {
+      this.frmClientesRegistro.reset();
+    });
   }
 
   // Crear formulario reactivo
@@ -156,5 +172,19 @@ export class ClientesRegistro implements AfterViewInit, OnInit {
       telefono: iCliente.telefono,
       email: iCliente.email,
     });
+  }
+
+  // Método para pasar el focus
+  pasarFocus(event: Event) {
+    event.preventDefault();
+    const inputsArray = this.inputs.toArray();
+    const currentIndex = inputsArray.findIndex((el) => el.nativeElement === event.target);
+
+    const nextInput = inputsArray[currentIndex + 1];
+    if (nextInput) {
+      nextInput.nativeElement.focus();
+    } else {
+      this.guardarRegistro();
+    }
   }
 }

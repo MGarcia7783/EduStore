@@ -1,14 +1,15 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClienteService } from '../../servicios/cliente.service';
 import { IClientes } from '../../modelos/iclientes';
 import { ToastrService } from 'ngx-toastr';
 import { ClientesRegistro } from '../clientes-registro/clientes-registro';
 import Swal from 'sweetalert2';
+import { PageChangedEvent, PaginationModule } from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'app-clientes-listado',
-  imports: [ReactiveFormsModule, ClientesRegistro],
+  imports: [ReactiveFormsModule, ClientesRegistro, PaginationModule, FormsModule],
   templateUrl: './clientes-listado.html',
   styleUrl: './clientes-listado.css',
 })
@@ -17,6 +18,11 @@ export class ClientesListado implements OnInit {
   private toastr = inject(ToastrService);
   public clientes: IClientes[] = [];
   @ViewChild('modalClientes') formModal!: ClientesRegistro;
+
+  public registroPaginado: IClientes[] = [];
+  totalItems = 0;
+  pageItems = 10;
+  currentPage = 1;
 
   private fb = inject(FormBuilder);
   public frmListadoClientes = this.fb.group({
@@ -29,12 +35,24 @@ export class ClientesListado implements OnInit {
     this.clienteService.actualizarLista$.subscribe(() => {
       this.getAll();
     });
+
+    this.frmListadoClientes.controls['nombreCliente'].valueChanges.subscribe(
+      (nombre: string | null) => {
+        if (nombre && nombre.trim() !== '') {
+          this.buscarRegistro(nombre);
+        } else {
+          this.getAll();
+        }
+      }
+    );
   }
 
   getAll() {
     this.clienteService.mostrarTodos().subscribe({
       next: (res) => {
         this.clientes = res;
+        this.totalItems = this.clientes.length;
+        this.registroPaginado = this.clientes.slice(0, this.pageItems);
       },
       error: () => {
         this.toastr.error('Error al cargar listado de clientes', 'Error', { timeOut: 6000 });
@@ -70,5 +88,25 @@ export class ClientesListado implements OnInit {
         });
       }
     });
+  }
+
+  buscarRegistro(nombre: string) {
+    this.clienteService.buacarPorNombre(nombre).subscribe({
+      next: (res) => {
+        this.clientes = res;
+        this.totalItems = this.clientes.length;
+        this.currentPage = 1;
+        this.registroPaginado = this.clientes.slice(0, this.pageItems);
+      },
+      error: () => {
+        this.toastr.error('Error al buscar el registro', 'Error', { timeOut: 5000 });
+      },
+    });
+  }
+
+  cambiarPagina(event: PageChangedEvent): void {
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = startItem + event.itemsPerPage;
+    this.registroPaginado = this.clientes.slice(startItem, endItem);
   }
 }
