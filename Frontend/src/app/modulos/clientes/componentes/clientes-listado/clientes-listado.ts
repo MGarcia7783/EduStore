@@ -21,7 +21,7 @@ export class ClientesListado implements OnInit {
 
   public registroPaginado: IClientes[] = [];
   totalItems = 0;
-  pageItems = 10;
+  pageItems = 5;
   currentPage = 1;
 
   private fb = inject(FormBuilder);
