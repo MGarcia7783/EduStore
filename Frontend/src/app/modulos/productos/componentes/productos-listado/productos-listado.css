@@ -1,0 +1,7 @@
+.product-image{
+  width: 35px;
+  height: 30px;
+  object-fit: fill;
+  display: block;
+  margin: 0 auto;
+}

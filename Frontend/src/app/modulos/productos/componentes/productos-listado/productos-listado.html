@@ -1,0 +1,78 @@
+<div class="no-select" style="margin-top: 40px">
+  <form [formGroup]="frmListadoProductos">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input
+            type="text"
+            formControlName="nombreProducto"
+            class="form-control"
+            placeholder="Nombre del producto..."
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <button
+          type="button"
+          title="Registrar nuevo producto"
+          class="btn btn-primary mb-2"
+        >
+          Nuevo registro
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="row" style="margin-top: 30px">
+    <div class="col-sm-12">
+      <table class="table">
+        <thead class="thead-light">
+          <tr class="encabezado-tabla">
+            <th scope="col">Producto</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Precio</th>
+            <th scope="col" style="text-align: center;">Imágen</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(producto of registroPaginado; track producto.id) {
+          <tr>
+            <th style="font-weight: normal">{{ producto.nombreProducto }}</th>
+            <td>{{ producto.descripcionProducto }}</td>
+            <td>{{ producto.precio }}</td>
+            <td>
+              <img [src]="producto.imagen" [alt]="producto.imagen" class="product-image">
+            </td>
+            <td>
+              <i
+                class="bi bi-pencil-square icon-edit"
+                title="Editar producto"
+              ></i>
+              <i
+                class="bi bi-trash icon-delete"
+                title="Eliminar producto"
+              ></i>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+
+      <div class="d-flex justify-content-end">
+        <pagination
+          [totalItems]="totalItems"
+          [(ngModel)]="currentPage"
+          [itemsPerPage]="pageItems"
+          (pageChanged)="cambiarPagina($event)"
+          style="margin-top: 10px"
+        >
+        </pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+
