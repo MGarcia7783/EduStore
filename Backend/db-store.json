@@ -70,28 +70,28 @@
       "nombreProducto": "Borrador de leche",
       "descripcionProducto": "Borrador suave para lápiz y portaminas.",
       "precio": 0.27,
-      "imagen": "https://raw.githubusercontent.com/MGarcia7783/EduStore/refs/heads/main/borrador.png",
+      "imagen": "https://raw.githubusercontent.com/MGarcia7783/EduStore/fbf965df3b136dbb571b226f25ada9c2e2b54281/Imagenes/borrador.png",
       "id": "a1b2"
     },
     {
       "nombreProducto": "Lápiceros Deli",
       "descripcionProducto": "Lapicero de tinta, punta fina, ideal para escritura suave.",
       "precio": 0.54,
-      "imagen": "https://raw.githubusercontent.com/MGarcia7783/EduStore/refs/heads/main/lapiceros.png",
+      "imagen": "https://raw.githubusercontent.com/MGarcia7783/EduStore/fbf965df3b136dbb571b226f25ada9c2e2b54281/Imagenes/lapiceros.png",
       "id": "b2c3"
     },
     {
       "nombreProducto": "Cuaderno universitario",
       "descripcionProducto": "Cuaderno de 100 hojas rayadas con espiral metálico.",
       "precio": 3.25,
-      "imagen": "https://raw.githubusercontent.com/MGarcia7783/EduStore/refs/heads/main/cuaderno.png",
+      "imagen": "https://raw.githubusercontent.com/MGarcia7783/EduStore/fbf965df3b136dbb571b226f25ada9c2e2b54281/Imagenes/cuaderno.png",
       "id": "c3d4"
     },
     {
       "nombreProducto": "Lápices de colores",
       "descripcionProducto": "Lápices de colores variados para dibujar y colorear.",
       "precio": 2.16,
-      "imagen": "https://raw.githubusercontent.com/MGarcia7783/EduStore/refs/heads/main/lapiz_color.png",
+      "imagen": "https://raw.githubusercontent.com/MGarcia7783/EduStore/fbf965df3b136dbb571b226f25ada9c2e2b54281/Imagenes/lapiz_color.png",
       "id": "c3d5"
     }
   ]

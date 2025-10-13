@@ -1,0 +1,159 @@
+<div class="no-select">
+  <div
+    class="modal fade"
+    #modalProductos
+    id="modalProductosCenter"
+    tabindex="-1"
+    aria-labelledby="modalProductosCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white py-3">
+          <h5 class="modal-title">
+            <i class="bi bi-box me-2"></i>Registro de Productos
+          </h5>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="frmProductoRegistro">
+            <div class="row">
+              <div class="col-md-12 pt-4 px-4">
+                <div class="mb-3">
+                  <label for="nombre">Nombre del Producto</label>
+                  <input
+                    type="text"
+                    formControlName="nombreProducto"
+                    class="form-control"
+                    autocomplete="off"
+                    (keydown.enter)="pasarFocus($event)"
+                    #input
+                    [ngClass]="{
+                      'is-invalid': fm['nombreProducto'].invalid && fm['nombreProducto'].touched
+                    }"
+                  />
+                  @if (fm['nombreProducto'].invalid && fm['nombreProducto'].touched) {
+                  <div class="invalid-feedback">
+                    @if (fm['nombreProducto'].errors?.['required']) {
+                    <div>El nombre del producto es requerido</div>
+                    } @if (fm['nombreProducto'].hasError('minlength')) {
+                    <div>
+                      El nombre del producto debe tener como mínimo
+                      {{ fm['nombreProducto'].getError('minlength').requiredLength }} caracteres.
+                    </div>
+                    } @if (fm['nombreProducto'].hasError('maxlength')) {
+                    <div>
+                      El nombre del producto no debe exceder los
+                      {{ fm['nombreProducto'].getError('maxlength').requiredLength }} caracteres.
+                    </div>
+                    }
+                  </div>
+                  }
+                </div>
+
+                <div class="mb-3">
+                  <label for="precio">Precio</label>
+                  <input
+                    type="number"
+                    formControlName="precio"
+                    class="form-control"
+                    autocomplete="off"
+                    (keydown.enter)="pasarFocus($event)"
+                    #input
+                    [ngClass]="{
+                      'is-invalid': fm['precio'].invalid && fm['precio'].touched
+                    }"
+                  />
+                  @if (fm['precio'].invalid && fm['precio'].touched) {
+                  <div class="invalid-feedback">
+                    @if (fm['precio'].errors?.['required']) {
+                    <div>El precio es requerido</div>
+                    } @if (fm['precio'].errors?.['precioInvalido']) {
+                    <div>El precio debe ser un número mayor a cero</div>
+                    }
+                  </div>
+                  }
+                </div>
+
+                <div class="mb-3">
+                  <label for="imagen">URL de la Imágen</label>
+                  <input
+                    type="text"
+                    formControlName="imagen"
+                    class="form-control"
+                    autocomplete="off"
+                    (keydown.enter)="pasarFocus($event)"
+                    #input
+                    [ngClass]="{
+                      'is-invalid': fm['imagen'].invalid && fm['imagen'].touched
+                    }"
+                  />
+                  @if (fm['imagen'].invalid && fm['imagen'].touched) {
+                  <div class="invalid-feedback">
+                    @if (fm['imagen'].errors?.['required']) {
+                    <div>La imágen es requerida</div>
+                    } @if (fm['imagen'].hasError('minlength')) {
+                    <div>
+                      La imágen debe tener como mínimo
+                      {{ fm['imagen'].getError('minlength').requiredLength }} caracteres.
+                    </div>
+                    } @if (fm['imagen'].hasError('maxlength')) {
+                    <div>
+                      La imágen no debe exceder los
+                      {{ fm['imagen'].getError('maxlength').requiredLength }} caracteres.
+                    </div>
+                    }
+                  </div>
+                  }
+                </div>
+
+                <div class="mb-3">
+                  <label for="descripcion">Descripción del Producto</label>
+                  <textarea
+                    type="text"
+                    formControlName="descripcionProducto"
+                    class="form-control"
+                    autocomplete="off"
+                    rows="3"
+                    (keydown.enter)="pasarFocus($event)"
+                    #input
+                    [ngClass]="{
+                      'is-invalid':
+                        fm['descripcionProducto'].invalid && fm['descripcionProducto'].touched
+                    }"
+                  ></textarea>
+                  @if (fm['descripcionProducto'].invalid && fm['descripcionProducto'].touched) {
+                  <div class="invalid-feedback">
+                    @if (fm['descripcionProducto'].errors?.['required']) {
+                    <div>La descripción es requerida</div>
+                    } @if (fm['descripcionProducto'].hasError('minlength')) {
+                    <div>
+                      La descripción debe tener como mínimo
+                      {{ fm['descripcionProducto'].getError('minlength').requiredLength }}
+                      caracteres.
+                    </div>
+                    } @if (fm['descripcionProducto'].hasError('maxlength')) {
+                    <div>
+                      La descripción no debe exceder los
+                      {{ fm['descripcionProducto'].getError('maxlength').requiredLength }}
+                      caracteres.
+                    </div>
+                    }
+                  </div>
+                  }
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">
+              <i class="bi bi-save me-2"></i>Guardar
+            </button>
+            <button type="button" class="btn btn-danger" (click)="cerrarModal()">
+              <i class="bi bi-x-circle me-2"></i>Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

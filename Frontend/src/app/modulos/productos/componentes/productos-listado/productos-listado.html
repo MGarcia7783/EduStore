@@ -18,6 +18,7 @@
           type="button"
           title="Registrar nuevo producto"
           class="btn btn-primary mb-2"
+          (click)="modalProductos.abrirModal()"
         >
           Nuevo registro
         </button>
@@ -74,5 +75,7 @@
     </div>
   </div>
 </div>
+
+<app-productos-registro #modalProductos></app-productos-registro>
 
 

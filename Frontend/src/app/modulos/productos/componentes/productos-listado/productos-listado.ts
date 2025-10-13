@@ -1,17 +1,14 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { ProductosService } from '../../servicios/productos.service';
 import { ToastrService } from 'ngx-toastr';
 import { IProductos } from '../../modelos/iproductos';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PageChangedEvent, PaginationModule } from 'ngx-bootstrap/pagination';
+import { ProductosRegistro } from '../productos-registro/productos-registro';
 
 @Component({
   selector: 'app-productos-listado',
-  imports: [
-    ReactiveFormsModule,
-    PaginationModule,
-    FormsModule
-  ],
+  imports: [ReactiveFormsModule, PaginationModule, FormsModule, ProductosRegistro],
   templateUrl: './productos-listado.html',
   styleUrl: './productos-listado.css',
 })
@@ -19,6 +16,7 @@ export class ProductosListado implements OnInit {
   private productoService = inject(ProductosService);
   private toastr = inject(ToastrService);
   public productos: IProductos[] = [];
+  @ViewChild('modalProductos') formModal!: ProductosRegistro;
 
   public registroPaginado: IProductos[] = [];
   totalItems = 0;
@@ -71,7 +69,7 @@ export class ProductosListado implements OnInit {
     });
   }
 
-    cambiarPagina(event: PageChangedEvent): void {
+  cambiarPagina(event: PageChangedEvent): void {
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = startItem + event.itemsPerPage;
     this.registroPaginado = this.productos.slice(startItem, endItem);

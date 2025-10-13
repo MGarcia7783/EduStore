@@ -14,7 +14,23 @@ export const PRODUCTOS_ROUTERS: Routes = [
       {
         path: 'listado',
         loadComponent: () =>
-          import('../componentes/productos-listado/productos-listado').then((p) => p.ProductosListado),
+          import('../componentes/productos-listado/productos-listado').then(
+            (p) => p.ProductosListado
+          ),
+      },
+      {
+        path: 'registro',
+        loadComponent: () =>
+          import('../componentes/productos-registro/productos-registro').then(
+            (p) => p.ProductosRegistro
+          ),
+      },
+      {
+        path: 'registro/id',
+        loadComponent: () =>
+          import('../componentes/productos-registro/productos-registro').then(
+            (p) => p.ProductosRegistro
+          ),
       },
     ],
   },
