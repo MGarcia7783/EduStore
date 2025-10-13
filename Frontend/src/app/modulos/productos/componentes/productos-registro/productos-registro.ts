@@ -21,14 +21,13 @@ import {
 import { ToastrService } from 'ngx-toastr';
 import { Productos } from '../../modelos/productos.modelos';
 import { CommonModule } from '@angular/common';
+import { IProductos } from '../../modelos/iproductos';
 
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-productos-registro',
-  imports: [
-    ReactiveFormsModule, CommonModule
-  ],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './productos-registro.html',
   styleUrl: './productos-registro.css',
 })
@@ -39,14 +38,14 @@ export class ProductosRegistro implements OnInit, AfterViewInit {
   private fb = inject(FormBuilder);
   private modalInstance: any;
   private toastr = inject(ToastrService);
-  private productosService = inject(ProductosService);
+  private productoService = inject(ProductosService);
 
   public frmProductoRegistro: FormGroup = this.fb.group({
     nombreProducto: new FormControl(''),
   });
 
   ngOnInit(): void {
-    this.createFormClientes();
+    this.createFormProductos();
   }
 
   ngAfterViewInit(): void {
@@ -59,7 +58,7 @@ export class ProductosRegistro implements OnInit, AfterViewInit {
   }
 
   // Crear formulario reactivo
-  createFormClientes() {
+  createFormProductos() {
     this.frmProductoRegistro = this.fb.group({
       id: [null],
       nombreProducto: [
@@ -101,7 +100,66 @@ export class ProductosRegistro implements OnInit, AfterViewInit {
     this.modalInstance.hide();
   }
 
-    // Método para pasar el focus
+  //Método para grabar un nuevo registro
+  guardarRegistro() {
+    if (this.frmProductoRegistro.invalid) {
+      this.frmProductoRegistro.markAllAsTouched();
+      this.toastr.warning('Completar todos los campos obligatorios.', 'Validación', {
+        timeOut: 5000,
+      });
+      return;
+    }
+
+    const iProducto: IProductos = {
+      id: this.fm['id'].value,
+      nombreProducto: this.fm['nombreProducto'].value,
+      descripcionProducto: this.fm['descripcionProducto'].value,
+      precio: this.fm['precio'].value,
+      imagen: this.fm['imagen'].value,
+    };
+
+    //Nuevo registro
+    if (!iProducto.id) {
+      delete (iProducto as any).id;
+      this.productoService.guardarRegistro(iProducto).subscribe({
+        next: () => {
+          this.productoService.notificarActualizacion();
+          this.toastr.success('Registro almacenado con éxito!', 'Registro');
+          this.cerrarModal();
+        },
+        error: () => {
+          this.toastr.error('Error al crear el registro', 'Error', { timeOut: 5000 });
+        },
+      });
+      //Editar registro
+    } else {
+      if (iProducto.id) {
+        this.productoService.actualizarRegistro(iProducto.id, iProducto).subscribe({
+          next: () => {
+            this.productoService.notificarActualizacion();
+            this.toastr.success('Registro actualizado con éxito!', 'Actualización');
+            this.cerrarModal();
+          },
+          error: () => {
+            this.toastr.error('Error al actualizar el registro', 'Error', { timeOut: 5000 });
+          },
+        });
+      }
+    }
+  }
+
+  // Cargar datos
+  cargarDatos(iProducto: IProductos) {
+    this.frmProductoRegistro.patchValue({
+      id: iProducto.id,
+      nombreProducto: iProducto.nombreProducto,
+      descripcionProducto: iProducto.descripcionProducto,
+      precio: iProducto.precio,
+      imagen: iProducto.imagen,
+    });
+  }
+
+  // Método para pasar el focus
   pasarFocus(event: Event) {
     event.preventDefault();
     const inputsArray = this.inputs.toArray();
@@ -111,7 +169,7 @@ export class ProductosRegistro implements OnInit, AfterViewInit {
     if (nextInput) {
       nextInput.nativeElement.focus();
     } else {
-      //this.guardarRegistro();
+      this.guardarRegistro();
     }
   }
 }

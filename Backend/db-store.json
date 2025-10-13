@@ -1,7 +1,7 @@
 {
   "clientes": [
     {
-      "id": 1,
+      "id": "1",
       "identificacion": "561-230987-0001L",
       "nombreCliente": "Carlos Martínez",
       "email": "carlos.martinez@example.com",
@@ -9,7 +9,7 @@
       "clave": "clave123"
     },
     {
-      "id": 2,
+      "id": "2",
       "identificacion": "562-120345-0002K",
       "nombreCliente": "Ana López",
       "email": "ana.lopez@example.com",
@@ -17,7 +17,7 @@
       "clave": "ana456"
     },
     {
-      "id": 3,
+      "id": "3",
       "identificacion": "563-987654-0003M",
       "nombreCliente": "Jorge Ramírez",
       "email": "jorge.ramirez@example.com",
@@ -25,7 +25,7 @@
       "clave": "jorge789"
     },
     {
-      "id": 4,
+      "id": "4",
       "identificacion": "564-456321-0004J",
       "nombreCliente": "María González",
       "email": "maria.gonzalez@example.com",
@@ -33,7 +33,7 @@
       "clave": "maria2024"
     },
     {
-      "id": 5,
+      "id": "5",
       "identificacion": "565-741852-0005P",
       "nombreCliente": "Luis Fernández",
       "email": "luis.fernandez@example.com",
@@ -41,7 +41,7 @@
       "clave": "luis321"
     },
     {
-      "id": 6,
+      "id": "6",
       "identificacion": "566-963258-0006N",
       "nombreCliente": "Patricia Morales",
       "email": "patricia.morales@example.com",
@@ -49,7 +49,7 @@
       "clave": "patri654"
     },
     {
-      "id": 7,
+      "id": "7",
       "identificacion": "567-159357-0007C",
       "nombreCliente": "Ricardo Castillo",
       "email": "ricardo.castillo@example.com",
@@ -57,7 +57,7 @@
       "clave": "ricardo987"
     },
     {
-      "id": 8,
+      "id": "8",
       "identificacion": "568-753159-0008H",
       "nombreCliente": "Laura Herrera",
       "email": "laura.herrera@example.com",
@@ -93,6 +93,20 @@
       "precio": 2.16,
       "imagen": "https://raw.githubusercontent.com/MGarcia7783/EduStore/fbf965df3b136dbb571b226f25ada9c2e2b54281/Imagenes/lapiz_color.png",
       "id": "c3d5"
+    },
+    {
+      "id": "d7e9",
+      "nombreProducto": "Marcadores permanentes",
+      "descripcionProducto": "Marcadores permanentes, colores surtidos para escribir en varias superficies.",
+      "precio": 1.3,
+      "imagen": "https://raw.githubusercontent.com/MGarcia7783/EduStore/fbf965df3b136dbb571b226f25ada9c2e2b54281/Imagenes/marcador.png"
+    },
+    {
+      "id": "885f",
+      "nombreProducto": "Mochilas escolares",
+      "descripcionProducto": "Mochilas escolares recientes, con compartimientos para libros y útiles escolares.",
+      "precio": 37.15,
+      "imagen": "https://raw.githubusercontent.com/MGarcia7783/EduStore/fbf965df3b136dbb571b226f25ada9c2e2b54281/Imagenes/mochila.png"
     }
   ]
 }

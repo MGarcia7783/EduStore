@@ -5,6 +5,7 @@ import { IProductos } from '../../modelos/iproductos';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PageChangedEvent, PaginationModule } from 'ngx-bootstrap/pagination';
 import { ProductosRegistro } from '../productos-registro/productos-registro';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-productos-listado',
@@ -20,7 +21,7 @@ export class ProductosListado implements OnInit {
 
   public registroPaginado: IProductos[] = [];
   totalItems = 0;
-  pageItems = 5;
+  pageItems = 10;
   currentPage = 1;
 
   private fb = inject(FormBuilder);
@@ -30,6 +31,10 @@ export class ProductosListado implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
+
+    this.productoService.actualizarLista$.subscribe(() => {
+      this.getAll();
+    });
 
     this.frmListadoProductos.controls['nombreProducto'].valueChanges.subscribe(
       (nombre: string | null) => {
@@ -52,6 +57,36 @@ export class ProductosListado implements OnInit {
       error: () => {
         this.toastr.error('Error al cargar listado de productos', 'Error', { timeOut: 6000 });
       },
+    });
+  }
+
+  modificarRegistro(iProducto: IProductos) {
+    this.formModal.cargarDatos(iProducto);
+    this.formModal.abrirModal();
+  }
+
+  eliminarRegistro(iProducto: IProductos) {
+    Swal.fire({
+      title: 'Alerta',
+      html: `¿Está seguro de eliminar el cliente: <strong>${iProducto.nombreProducto}</strong>?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#0d6efd',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '¡Sí, elimínalo!',
+      cancelButtonText: '¡No, cancela!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.productoService.eliminarRegistro(iProducto.id!).subscribe({
+          next: () => {
+            this.toastr.success('Registro eliminado con éxito', 'Información');
+            this.getAll();
+          },
+          error: () => {
+            this.toastr.error('Error al eliminar el registro', 'Error', { timeOut: 5000 });
+          },
+        });
+      }
     });
   }
 
