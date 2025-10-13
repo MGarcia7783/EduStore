@@ -11,6 +11,12 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./modulos/productos/rutas/productos.rutas').then(m => m.PRODUCTOS_ROUTERS)
   },
-  { path: '', redirectTo: 'clientes', pathMatch: 'full' },
-  { path: '', redirectTo: 'productos', pathMatch: 'full' },
+  {
+    path: 'pedidos',
+    loadChildren: () =>
+      import('./modulos/pedidos/rutas/pedidos.rutas').then(m => m.PEDIDOS_ROUTERS)
+  },
+  /*{ path: '', redirectTo: 'clientes', pathMatch: 'full' },
+  { path: '', redirectTo: 'productos', pathMatch: 'full' },*/
+  { path: '', redirectTo: 'pedidos', pathMatch: 'full' },
 ];

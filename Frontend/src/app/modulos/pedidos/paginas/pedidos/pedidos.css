@@ -1,0 +1,42 @@
+.nav-tabs {
+  border-bottom: 1px solid #dee2e6;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.nav-item .nav-link.active {
+  border-bottom: none;
+  background-color: #0d6efd;
+  color: white;
+}
+
+.nav-tabs .nav-item:not(:last-child) .nav-link {
+  padding-right: 16px;
+  margin-right: 16px;
+}
+
+.contenedor-carrito {
+  position: absolute;
+  right: 0;
+  bottom: 4px;
+  transform: translateY(-5%);
+}
+
+.carrito-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #dc3545;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+}
+

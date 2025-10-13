@@ -1,0 +1,25 @@
+<div class="container mt-4 no-select">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 style="margin-top: 10px; color: #444">Módulo de Pedidos</h2>
+  </div>
+
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <ul class="nav nav-tabs">
+      <li class="nav-item" style="cursor: pointer">
+        <a class="nav-link" routerLink="catalogo" routerLinkActive="active">
+          <i class="bi bi-box-seam me-2"></i> Catálogo
+        </a>
+      </li>
+      <li class="nav-item" style="cursor: pointer">
+        <a class="nav-link" routerLink="listado" routerLinkActive="active">
+          <i class="bi bi-calendar-check me-2"></i> Pedidos
+        </a>
+      </li>
+    </ul>
+    <div class="contenedor-carrito position-relative ms-3">
+      <i class="bi bi-cart-plus text-primary" style="font-size: 29px; cursor: pointer"></i>
+      <span class="carrito-badge">0</span>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
