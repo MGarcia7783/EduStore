@@ -107,6 +107,34 @@
       "descripcionProducto": "Mochilas escolares recientes, con compartimientos para libros y útiles escolares.",
       "precio": 37.15,
       "imagen": "https://raw.githubusercontent.com/MGarcia7783/EduStore/fbf965df3b136dbb571b226f25ada9c2e2b54281/Imagenes/mochila.png"
+    },
+    {
+      "id": "2691",
+      "nombreProducto": "Estuche geométrico",
+      "descripcionProducto": "Estuche con regla, escuadra y compás para uso escolar",
+      "precio": 2.5,
+      "imagen": "https://raw.githubusercontent.com/MGarcia7783/EduStore/61f85938e9772b6b53c45b54c1d223615d2dbdb1/Imagenes/estuche_geometrico.png"
+    },
+    {
+      "id": "7bb6",
+      "nombreProducto": "Loncheras escolares",
+      "descripcionProducto": "Loncheras resistentes y fáciles de limpiar, ideal para uso diario.",
+      "precio": 20.35,
+      "imagen": "https://raw.githubusercontent.com/MGarcia7783/EduStore/61f85938e9772b6b53c45b54c1d223615d2dbdb1/Imagenes/lonchera.png"
+    },
+    {
+      "id": "7596",
+      "nombreProducto": "Agenda personal",
+      "descripcionProducto": "Agenda con diseño moderno, perfecta para organizar tus actividades.",
+      "precio": 45.15,
+      "imagen": "https://raw.githubusercontent.com/MGarcia7783/EduStore/61f85938e9772b6b53c45b54c1d223615d2dbdb1/Imagenes/agenda.png"
+    },
+    {
+      "id": "260d",
+      "nombreProducto": "Cartucheras juveniles",
+      "descripcionProducto": "Cartuchera amplia con compartimientos, estilo juvenil y práctico.",
+      "precio": 35.72,
+      "imagen": "https://raw.githubusercontent.com/MGarcia7783/EduStore/61f85938e9772b6b53c45b54c1d223615d2dbdb1/Imagenes/cartuchera.png"
     }
   ]
 }

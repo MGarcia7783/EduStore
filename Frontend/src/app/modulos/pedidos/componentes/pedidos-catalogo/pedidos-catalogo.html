@@ -1,1 +1,57 @@
-<p>Catalogo</p>
+<div class="no-select mt-5">
+  <form [formGroup]="frmCatalogoProductos">
+    <div>
+      <div class="col-sm-7">
+        <div class="form-group">
+          <label for="buscar">Buscar registro:</label>
+          <input
+            type="text"
+            formControlName="nombreProducto"
+            class="form-control"
+            id="nombre"
+            placeholder="Digite el nombre del producto..."
+            autocomplete="off"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="main-content-wrapper d-flex flex-wrap justify-content-around align-items-start gap-4"
+    >
+      <div class="product-container d-flex flex-wrap justify-content-center gap-4 mt-3">
+        @for(producto of registroPaginado; track producto.id) {
+        <div class="card product-card text-center shadow-s position-relative">
+          <div class="img-wrapper">
+            <img [src]="producto.imagen" [alt]="producto.nombreProducto" class="product-img" />
+          </div>
+          <div class="card-body">
+            <h6 class="card-title">{{ producto.nombreProducto }}</h6>
+            <p class="card-description">{{ producto.descripcionProducto }}</p>
+            <p class="card-price">{{ producto.precio }}</p>
+          </div>
+
+          <div class="add-to-card-wrapper p-3">
+            <button
+              type="button"
+              class="btn btn-primary w-100 d-flex align-items-center justify-content-center gap-2"
+            >
+              <i class="bi bi-plus-circle"></i> Agregar al carrito
+            </button>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </form>
+
+  <div class="d-flex justify-content-end">
+    <pagination
+      [totalItems]="totalItems"
+      [(ngModel)]="currentPage"
+      [itemsPerPage]="pageItems"
+      (pageChanged)="cambiarPagina($event)"
+      style="margin-top: 10px"
+    >
+    </pagination>
+  </div>
+</div>
