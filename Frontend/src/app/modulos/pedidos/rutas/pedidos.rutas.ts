@@ -21,6 +21,11 @@ export const PEDIDOS_ROUTERS: Routes = [
         loadComponent: () =>
           import('../componentes/pedidos-catalogo/pedidos-catalogo').then((p) => p.PedidosCatalogo),
       },
+      {
+        path: 'carrito',
+        loadComponent: () =>
+          import('../componentes/pedidos-carrito/pedidos-carrito').then((p) => p.PedidosCarrito),
+      },
     ],
   },
 ];

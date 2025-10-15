@@ -1,0 +1,108 @@
+<div class="container-fluid mt-5 no-select">
+  <h4 class="mb4 text-primary fw-bold">
+    <i class="bi bi-bag-check-fill me-2"></i> Carrito de Compras
+  </h4>
+
+  <div class="row g-4">
+    <div class="col-lg-9">
+      <div class="card shadow-sm border-0">
+        <div class="card-bady p-4">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle caption-top">
+              <caption>
+                Productos seleccionados para tu compra
+              </caption>
+              <thead class="table-light">
+                <tr>
+                  <th scope="col" style="font-weight: 500">Producto</th>
+                  <th scope="col" style="font-weight: 500">Imagen</th>
+                  <th scope="col" style="font-weight: 500">Precio</th>
+                  <th scope="col" style="font-weight: 500">Cantidad</th>
+                  <th scope="col" style="font-weight: 500">Importe</th>
+                  <th scope="col" style="font-weight: 500">Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for(item of carritoItems; track item.producto) {
+                <tr class="text-start">
+                  {{
+                    item.producto.nombreProducto
+                  }}
+                </tr>
+                <tr>
+                  <img
+                    [src]="item.producto.imagen"
+                    alt="{{ item.producto.imagen }}"
+                    class="img-thumbnail"
+                    style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px"
+                  />
+                </tr>
+                <tr>
+                  {{
+                    item.producto.precio | currency : 'USD' : 'symbol' : '1.2-2'
+                  }}
+                </tr>
+                <tr>
+                  <input
+                    type="number"
+                    class="form-control form-control-sm text-center"
+                    [(ngModel)]="item.cantidad"
+                    min="1"
+                    style="max-width: 80px"
+                  />
+                </tr>
+                <tr>
+                  {{
+                    item.producto.precio * item.cantidad | currency : 'USD' : 'symbol' : '1.2-2'
+                  }}
+                </tr>
+                <tr>
+                  <button type="button" class="btn btn-outline-danger btn-sm">
+                    <i class="bi bi-trash-fill"></i>
+                  </button>
+                </tr>
+                } @if(carritoItems.length === 0) {
+                <tr>
+                  <td colspan="6" class="text-center py-4 text-muted">
+                    <i></i>Tu carrito está vacío. ¡Empieza a comprar!
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="card shadow-sm border-0 sticky-top" style="top: 80px">
+        <div class="card-bady p-4">
+          <h5 class="card-title mb-4 text-center text-secundary">
+            <i class="bi bi-receipt me-2"></i>RESUM DE COMPRA
+          </h5>
+          <hr class="mb-4" />
+          <div class="d-flex justify-content-between mb-3" style="font-weight: 500">
+            <p class="text-dark">Total de Productos</p>
+            <p class="text-dark">0</p>
+          </div>
+          <hr class="mb-4" />
+          <div class="d-flex justify-content-between mb-4 fs-5 fw-bolder text-primary">
+            <span>TOTAL</span>
+            <span>0.00</span>
+          </div>
+          <button
+            [disabled]="carritoItems.length === 0"
+            type="button"
+            class="btn btn-primary btn-md w-100 rounded-pill"
+          >
+            <i class="bi bi-bag-check me-2"></i>
+            <span>PROCESAR COMPRA</span>
+          </button>
+          <button type="button" class="btn btn-outline-secundary btn-sm mt-3 w-100 rounded-pill">
+            <i class="bi bi-arrow-left me-2"></i>Seguir Comprando
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
