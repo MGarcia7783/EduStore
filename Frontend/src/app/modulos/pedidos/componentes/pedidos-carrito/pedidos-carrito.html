@@ -23,43 +23,45 @@
                 </tr>
               </thead>
               <tbody>
-                @for(item of carritoItems; track item.producto) {
-                <tr class="text-start">
-                  {{
-                    item.producto.nombreProducto
-                  }}
-                </tr>
+                @for(item of carritoItems; track item.producto; let i = $index) {
                 <tr>
-                  <img
-                    [src]="item.producto.imagen"
-                    alt="{{ item.producto.imagen }}"
-                    class="img-thumbnail"
-                    style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px"
-                  />
-                </tr>
-                <tr>
-                  {{
-                    item.producto.precio | currency : 'USD' : 'symbol' : '1.2-2'
-                  }}
-                </tr>
-                <tr>
-                  <input
-                    type="number"
-                    class="form-control form-control-sm text-center"
-                    [(ngModel)]="item.cantidad"
-                    min="1"
-                    style="max-width: 80px"
-                  />
-                </tr>
-                <tr>
-                  {{
-                    item.producto.precio * item.cantidad | currency : 'USD' : 'symbol' : '1.2-2'
-                  }}
-                </tr>
-                <tr>
-                  <button type="button" class="btn btn-outline-danger btn-sm">
-                    <i class="bi bi-trash-fill"></i>
-                  </button>
+                  <td class="text-start">
+                    {{ item.producto.nombreProducto }}
+                  </td>
+                  <td>
+                    <img
+                      [src]="item.producto.imagen"
+                      alt="{{ item.producto.imagen }}"
+                      class="img-thumbnail"
+                      style="width: 60px; height: 60px; object-fit: contain; border-radius: 8px"
+                    />
+                  </td>
+                  <td>
+                    {{ item.producto.precio | currency : 'USD' : 'symbol' : '1.2-2' }}
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      class="form-control form-control-sm text-center"
+                      [(ngModel)]="item.cantidad"
+                      min="1"
+                      style="max-width: 80px"
+                    />
+                  </td>
+                  <td>
+                    {{
+                      item.producto.precio * item.cantidad | currency : 'USD' : 'symbol' : '1.2-2'
+                    }}
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn btn-outline-danger btn-sm"
+                      (click)="eliminarProducto(i, item.producto.nombreProducto)"
+                    >
+                      <i class="bi bi-trash-fill"></i>
+                    </button>
+                  </td>
                 </tr>
                 } @if(carritoItems.length === 0) {
                 <tr>
@@ -83,12 +85,14 @@
           <hr class="mb-4" />
           <div class="d-flex justify-content-between mb-3" style="font-weight: 500">
             <p class="text-dark">Total de Productos</p>
-            <p class="text-dark">0</p>
+            <p class="text-dark">{{ carritoService.getTotalItems() | number : '1.2-2' }}</p>
           </div>
           <hr class="mb-4" />
           <div class="d-flex justify-content-between mb-4 fs-5 fw-bolder text-primary">
             <span>TOTAL</span>
-            <span>0.00</span>
+            <span>{{
+              carritoService.calcularTotal() | currency : 'USD' : 'symbol' : '1.2-2'
+            }}</span>
           </div>
           <button
             [disabled]="carritoItems.length === 0"
@@ -98,7 +102,11 @@
             <i class="bi bi-bag-check me-2"></i>
             <span>PROCESAR COMPRA</span>
           </button>
-          <button type="button" class="btn btn-outline-secundary btn-sm mt-3 w-100 rounded-pill">
+          <button
+            type="button"
+            class="btn btn-outline-secundary btn-sm mt-3 w-100 rounded-pill"
+            (click)="abrirCatalogo()"
+          >
             <i class="bi bi-arrow-left me-2"></i>Seguir Comprando
           </button>
         </div>
