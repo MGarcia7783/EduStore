@@ -1,26 +1,36 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { CarritoService } from '../../servicios/carrito.service';
 import { Carrito } from '../../modelos/carrito';
-import { CurrencyPipe, DecimalPipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { CurrencyPipe, DecimalPipe, NgClass } from '@angular/common';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { PedidosService } from '../../servicios/pedidos.service';
 
 @Component({
   selector: 'app-pedidos-carrito',
-  imports: [CurrencyPipe, FormsModule, DecimalPipe],
+  imports: [CurrencyPipe, FormsModule, DecimalPipe, ReactiveFormsModule, NgClass],
   templateUrl: './pedidos-carrito.html',
   styleUrl: './pedidos-carrito.css',
 })
 export class PedidosCarrito implements OnInit {
   public carritoService = inject(CarritoService);
+  public pedidoService = inject(PedidosService);
   private toastr = inject(ToastrService);
   private router = inject(Router);
+  private fb = inject(FormBuilder);
   carritoItems: Carrito[] = [];
+
+  @ViewChildren('input') inputs!: QueryList<ElementRef>;
+
+  public frmDatosEntrega: FormGroup = this.fb.group({
+    cliente: new FormControl(''),
+  });
 
   ngOnInit(): void {
     this.obtenerCarrito();
+    this.createFormDatosEntrega();
   }
 
   obtenerCarrito() {
@@ -53,5 +63,30 @@ export class PedidosCarrito implements OnInit {
 
   abrirCatalogo(): void {
     this.router.navigate(['pedidos/catalogo']);
+  }
+
+  createFormDatosEntrega() {
+    this.frmDatosEntrega = this.fb.group({
+      cliente: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
+      telefono: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
+      direccion: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
+    });
+  }
+
+  get fm(): { [key: string]: AbstractControl } {
+    return this.frmDatosEntrega.controls;
+  }
+
+    pasarFocus(event: Event) {
+    event.preventDefault();
+    const inputsArray = this.inputs.toArray();
+    const currentIndex = inputsArray.findIndex((el) => el.nativeElement === event.target);
+
+    const nextInput = inputsArray[currentIndex + 1];
+    if (nextInput) {
+      nextInput.nativeElement.focus();
+    } else {
+     // this.guardarRegistro();
+    }
   }
 }

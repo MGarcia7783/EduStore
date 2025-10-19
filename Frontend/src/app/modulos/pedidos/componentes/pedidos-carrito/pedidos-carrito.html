@@ -4,7 +4,7 @@
   </h4>
 
   <div class="row g-4">
-    <div class="col-lg-9">
+    <div class="col-lg-8">
       <div class="card shadow-sm border-0">
         <div class="card-bady p-4">
           <div class="table-responsive">
@@ -25,9 +25,7 @@
               <tbody>
                 @for(item of carritoItems; track item.producto; let i = $index) {
                 <tr>
-                  <td class="text-start">
-                    {{ item.producto.nombreProducto }}
-                  </td>
+                  <td class="text-start">{{ item.producto.nombreProducto }}</td>
                   <td>
                     <img
                       [src]="item.producto.imagen"
@@ -36,9 +34,7 @@
                       style="width: 60px; height: 60px; object-fit: contain; border-radius: 8px"
                     />
                   </td>
-                  <td>
-                    {{ item.producto.precio | currency : 'USD' : 'symbol' : '1.2-2' }}
-                  </td>
+                  <td>{{ item.producto.precio | currency : 'USD' : 'symbol' : '1.2-2' }}</td>
                   <td>
                     <input
                       type="number"
@@ -76,39 +72,135 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-4">
       <div class="card shadow-sm border-0 sticky-top" style="top: 80px">
         <div class="card-bady p-4">
           <h5 class="card-title mb-4 text-center text-secundary">
-            <i class="bi bi-receipt me-2"></i>RESUM DE COMPRA
+            <i class="bi bi-receipt me-2"></i>RESUMEN DE COMPRA
           </h5>
           <hr class="mb-4" />
-          <div class="d-flex justify-content-between mb-3" style="font-weight: 500">
-            <p class="text-dark">Total de Productos</p>
-            <p class="text-dark">{{ carritoService.getTotalItems() | number : '1.2-2' }}</p>
-          </div>
-          <hr class="mb-4" />
-          <div class="d-flex justify-content-between mb-4 fs-5 fw-bolder text-primary">
-            <span>TOTAL</span>
-            <span>{{
-              carritoService.calcularTotal() | currency : 'USD' : 'symbol' : '1.2-2'
-            }}</span>
-          </div>
-          <button
-            [disabled]="carritoItems.length === 0"
-            type="button"
-            class="btn btn-primary btn-md w-100 rounded-pill"
-          >
-            <i class="bi bi-bag-check me-2"></i>
-            <span>PROCESAR COMPRA</span>
-          </button>
-          <button
-            type="button"
-            class="btn btn-outline-secundary btn-sm mt-3 w-100 rounded-pill"
-            (click)="abrirCatalogo()"
-          >
-            <i class="bi bi-arrow-left me-2"></i>Seguir Comprando
-          </button>
+          <h6 class="mb-3" text-primary>Datos de Entrega</h6>
+          <form [formGroup]="frmDatosEntrega">
+            <div class="mb-3">
+              <label for="cliente" class="form-labek">Cliente</label>
+              <input
+                type="text"
+                formControlName="cliente"
+                class="form-control"
+                autocomplete="off"
+                (keydown.enter)="pasarFocus($event)"
+                #input
+                [ngClass]="{
+                  'is-invalid': fm['cliente'].invalid && fm['cliente'].touched
+                }"
+              />
+              @if (fm['cliente'].invalid && fm['cliente'].touched) {
+              <div class="invalid-feedback">
+                @if (fm['cliente'].errors?.['required']) {
+                <div>El cliente es requerido</div>
+                } @if (fm['cliente'].hasError('minlength')) {
+                <div>
+                  El cliente debe tener como mínimo
+                  {{ fm['cliente'].getError('minlength').requiredLength }} caracteres.
+                </div>
+                } @if (fm['cliente'].hasError('maxlength')) {
+                <div>
+                  El cliente no debe exceder los
+                  {{ fm['cliente'].getError('maxlength').requiredLength }} caracteres.
+                </div>
+                }
+              </div>
+              }
+            </div>
+            <div class="mb-3">
+              <label for="telefono" class="form-labek">Teléfono</label>
+              <input
+                type="text"
+                formControlName="telefono"
+                class="form-control"
+                autocomplete="off"
+                (keydown.enter)="pasarFocus($event)"
+                #input
+                [ngClass]="{
+                  'is-invalid': fm['telefono'].invalid && fm['telefono'].touched
+                }"
+              />
+              @if (fm['telefono'].invalid && fm['telefono'].touched) {
+              <div class="invalid-feedback">
+                @if (fm['telefono'].errors?.['required']) {
+                <div>El teléfono es requerido</div>
+                } @if (fm['telefono'].hasError('minlength')) {
+                <div>
+                  El teléfono debe tener como mínimo
+                  {{ fm['telefono'].getError('minlength').requiredLength }} caracteres.
+                </div>
+                } @if (fm['telefono'].hasError('maxlength')) {
+                <div>
+                  El teléfono no debe exceder los
+                  {{ fm['telefono'].getError('maxlength').requiredLength }} caracteres.
+                </div>
+                }
+              </div>
+              }
+            </div>
+            <div class="mb-3">
+              <label for="direccion" class="form-labek">Dirección</label>
+              <textarea
+                name="direccion"
+                formControlName="direccion"
+                class="form-control"
+                autocomplete="off"
+                (keydown.enter)="pasarFocus($event)"
+                #input
+                [ngClass]="{
+                  'is-invalid': fm['direccion'].invalid && fm['direccion'].touched
+                }"
+              ></textarea>
+              @if (fm['direccion'].invalid && fm['direccion'].touched) {
+              <div class="invalid-feedback">
+                @if (fm['direccion'].errors?.['required']) {
+                <div>La dirección es requerida</div>
+                } @if (fm['direccion'].hasError('minlength')) {
+                <div>
+                  La dirección debe tener como mínimo
+                  {{ fm['direccion'].getError('minlength').requiredLength }} caracteres.
+                </div>
+                } @if (fm['direccion'].hasError('maxlength')) {
+                <div>
+                  La dirección no debe exceder los
+                  {{ fm['direccion'].getError('maxlength').requiredLength }} caracteres.
+                </div>
+                }
+              </div>
+              }
+            </div>
+            <div class="d-flex justify-content-between mb-3" style="font-weight: 500">
+              <p class="text-dark">Total de Productos</p>
+              <p class="text-dark">{{ carritoService.getTotalItems() | number : '1.2-2' }}</p>
+            </div>
+            <hr class="mb-4" />
+            <div class="d-flex justify-content-between mb-4 fs-5 fw-bolder text-primary">
+              <span>TOTAL</span>
+              <span>{{
+                carritoService.calcularTotal() | currency : 'USD' : 'symbol' : '1.2-2'
+              }}</span>
+            </div>
+            <button
+              [disabled]="carritoItems.length === 0"
+              type="button"
+              class="btn btn-primary btn-md w-100 rounded-pill"
+            >
+              <i class="bi bi-bag-check me-2"></i>
+              <span>PROCESAR COMPRA</span>
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secundary btn-sm mt-3 w-100 rounded-pill"
+              (click)="abrirCatalogo()"
+            >
+              <i class="bi bi-arrow-left me-2"></i>Seguir Comprando
+            </button>
+          </form>
         </div>
       </div>
     </div>
