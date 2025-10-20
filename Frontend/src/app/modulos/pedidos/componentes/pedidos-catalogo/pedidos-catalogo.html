@@ -27,7 +27,7 @@
           <div class="card-body">
             <h6 class="card-title">{{ producto.nombreProducto }}</h6>
             <p class="card-description">{{ producto.descripcionProducto }}</p>
-            <p class="card-price">{{ producto.precio }}</p>
+            <p class="card-price">{{ producto.precio | currency : 'USD' : 'symbol' : '1.2-2' }}</p>
           </div>
 
           <div class="add-to-card-wrapper p-3">

@@ -136,5 +136,88 @@
       "precio": 35.72,
       "imagen": "https://raw.githubusercontent.com/MGarcia7783/EduStore/61f85938e9772b6b53c45b54c1d223615d2dbdb1/Imagenes/cartuchera.png"
     }
+  ],
+  "pedidos": [
+    {
+      "id": "c678",
+      "fechaPedido": "2025-10-19T23:03:05.182Z",
+      "datosEntrega": {
+        "cliente": "Carlos Ruiz",
+        "telefono": "+505 74859632",
+        "direccion": "Rivas, Santana"
+      },
+      "items": [
+        {
+          "producto": "Mochilas escolares",
+          "cantidad": 1,
+          "precio": 37.15
+        },
+        {
+          "producto": "Estuche geométrico",
+          "cantidad": 1,
+          "precio": 2.5
+        },
+        {
+          "producto": "Borrador de leche",
+          "cantidad": 1,
+          "precio": 0.27
+        },
+        {
+          "producto": "Agenda personal",
+          "cantidad": 1,
+          "precio": 45.15
+        }
+      ],
+      "total": 85.07
+    },
+    {
+      "id": "915b",
+      "fechaPedido": "2025-10-19T23:04:46.302Z",
+      "datosEntrega": {
+        "cliente": "Marcos Fuentes",
+        "telefono": "+505 25369874",
+        "direccion": "Rivas, San Isidro"
+      },
+      "items": [
+        {
+          "producto": "Borrador de leche",
+          "cantidad": 1,
+          "precio": 0.27
+        },
+        {
+          "producto": "Lápiceros Deli",
+          "cantidad": 1,
+          "precio": 0.54
+        },
+        {
+          "producto": "Cuaderno universitario",
+          "cantidad": 1,
+          "precio": 3.25
+        }
+      ],
+      "total": 4.0600000000000005
+    },
+    {
+      "id": "f50f",
+      "fechaPedido": "2025-10-19T23:14:14.629Z",
+      "datosEntrega": {
+        "cliente": "Martha Arguello",
+        "telefono": "+505 74859625",
+        "direccion": "Rivas, Pedro Espinoza"
+      },
+      "items": [
+        {
+          "producto": "Mochilas escolares",
+          "cantidad": 1,
+          "precio": 37.15
+        },
+        {
+          "producto": "Estuche geométrico",
+          "cantidad": 1,
+          "precio": 2.5
+        }
+      ],
+      "total": 39.65
+    }
   ]
 }

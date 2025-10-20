@@ -6,10 +6,11 @@ import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule } from '@ang
 import { PageChangedEvent, PaginationComponent } from 'ngx-bootstrap/pagination';
 import { CarritoService } from '../../servicios/carrito.service';
 import Swal from 'sweetalert2';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-pedidos-catalogo',
-  imports: [ReactiveFormsModule, PaginationComponent, FormsModule],
+  imports: [ReactiveFormsModule, PaginationComponent, FormsModule, CurrencyPipe],
   templateUrl: './pedidos-catalogo.html',
   styleUrl: './pedidos-catalogo.css',
 })

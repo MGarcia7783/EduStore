@@ -1,16 +1,18 @@
 import { ToastrService } from 'ngx-toastr';
 import { IPedidos } from '../../modelos/ipedidos';
 import { PedidosService } from './../../servicios/pedidos.service';
-import { Component, inject } from '@angular/core';
-import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+import { Component, inject, OnInit } from '@angular/core';
+import { PageChangedEvent, PaginationModule } from 'ngx-bootstrap/pagination';
+import { CurrencyPipe, DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-pedidos-listado',
-  imports: [],
+  imports: [DatePipe, CurrencyPipe, PaginationModule, FormsModule],
   templateUrl: './pedidos-listado.html',
   styleUrl: './pedidos-listado.css',
 })
-export class PedidosListado {
+export class PedidosListado implements OnInit {
   private pedidoService = inject(PedidosService);
   private toastr = inject(ToastrService);
 
@@ -20,6 +22,10 @@ export class PedidosListado {
   totalItems = 0;
   pageItems = 5;
   currentPage = 1;
+
+  ngOnInit(): void {
+    this.cargarPedidos();
+  }
 
   cargarPedidos() {
     this.pedidoService.mostrarTodos().subscribe({

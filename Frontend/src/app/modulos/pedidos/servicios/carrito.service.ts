@@ -75,4 +75,9 @@ export class CarritoService {
     }
     this.emitirCantidad();
   }
+
+  limpiarCarrito(): void {
+    this.carritoItems = [];
+    this.guardarCarritoStorage();
+  }
 }
