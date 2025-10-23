@@ -19,4 +19,9 @@ export class PedidosService {
   guardarRegistro(iPedido: IPedidos): Observable<IPedidos> {
     return this.httpClient.post<IPedidos>(this.url, iPedido);
   }
+
+    obtenerPedido(id: string): Observable<IPedidos> {
+      const url_local = `${this.url}/${id}`
+      return this.httpClient.get<IPedidos>(url_local)
+    }
 }

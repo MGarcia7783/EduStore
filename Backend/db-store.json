@@ -139,85 +139,72 @@
   ],
   "pedidos": [
     {
-      "id": "c678",
-      "fechaPedido": "2025-10-19T23:03:05.182Z",
+      "id": "c4cd",
+      "fechaPedido": "2025-10-22T23:47:27.014Z",
       "datosEntrega": {
+        "idCliente": "1",
         "cliente": "Carlos Ruiz",
         "telefono": "+505 74859632",
-        "direccion": "Rivas, Santana"
+        "direccion": "Rivas, Nicaragua."
       },
       "items": [
         {
-          "producto": "Mochilas escolares",
-          "cantidad": 1,
-          "precio": 37.15
-        },
-        {
-          "producto": "Estuche geométrico",
-          "cantidad": 1,
-          "precio": 2.5
-        },
-        {
+          "idProducto": "a1b2",
           "producto": "Borrador de leche",
           "cantidad": 1,
           "precio": 0.27
         },
         {
-          "producto": "Agenda personal",
-          "cantidad": 1,
-          "precio": 45.15
-        }
-      ],
-      "total": 85.07
-    },
-    {
-      "id": "915b",
-      "fechaPedido": "2025-10-19T23:04:46.302Z",
-      "datosEntrega": {
-        "cliente": "Marcos Fuentes",
-        "telefono": "+505 25369874",
-        "direccion": "Rivas, San Isidro"
-      },
-      "items": [
-        {
-          "producto": "Borrador de leche",
-          "cantidad": 1,
-          "precio": 0.27
-        },
-        {
+          "idProducto": "b2c3",
           "producto": "Lápiceros Deli",
           "cantidad": 1,
           "precio": 0.54
-        },
-        {
-          "producto": "Cuaderno universitario",
-          "cantidad": 1,
-          "precio": 3.25
         }
       ],
-      "total": 4.0600000000000005
+      "total": 0.81
     },
     {
-      "id": "f50f",
-      "fechaPedido": "2025-10-19T23:14:14.629Z",
+      "id": "ca1a",
+      "fechaPedido": "2025-10-23T00:38:21.007Z",
       "datosEntrega": {
-        "cliente": "Martha Arguello",
-        "telefono": "+505 74859625",
-        "direccion": "Rivas, Pedro Espinoza"
+        "idCliente": "1",
+        "cliente": "Mateo de Jesús Rivas Ruiz",
+        "telefono": "+505 74259856",
+        "direccion": "Rivas, Bo. Santa Ana, de los bomberos 3c al norte."
       },
       "items": [
         {
+          "idProducto": "885f",
           "producto": "Mochilas escolares",
           "cantidad": 1,
           "precio": 37.15
         },
         {
+          "idProducto": "2691",
           "producto": "Estuche geométrico",
           "cantidad": 1,
           "precio": 2.5
+        },
+        {
+          "idProducto": "7bb6",
+          "producto": "Loncheras escolares",
+          "cantidad": 1,
+          "precio": 20.35
+        },
+        {
+          "idProducto": "7596",
+          "producto": "Agenda personal",
+          "cantidad": 1,
+          "precio": 45.15
+        },
+        {
+          "idProducto": "260d",
+          "producto": "Cartucheras juveniles",
+          "cantidad": 1,
+          "precio": 35.72
         }
       ],
-      "total": 39.65
+      "total": 140.87
     }
   ]
 }

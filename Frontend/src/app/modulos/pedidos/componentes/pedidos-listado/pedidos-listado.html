@@ -27,7 +27,10 @@
             <td>{{ pedido.datosEntrega.telefono }}</td>
             <td>{{ pedido.total | currency : 'USD' : 'symbol' : '1.2-2' }}</td>
             <td class="text-center">
-              <button class="btn btn-outline-primary btn-sm rounded-pill">
+              <button
+                class="btn btn-outline-primary btn-sm rounded-pill"
+                (click)="verDetalles(pedido)"
+              >
                 <i></i>Ver Detalles
               </button>
             </td>
@@ -54,3 +57,5 @@
     </div>
   </div>
 </div>
+
+<app-pedidos-detalle #modalDetallesPedido></app-pedidos-detalle>

@@ -127,6 +127,7 @@ export class PedidosCarrito implements OnInit {
       if (result.isConfirmed) {
         // mapear items al carrito
         const itemsPedido = this.carritoService.obtenerCarrito().map((item) => ({
+          idProducto: item.producto.id,
           producto: item.producto.nombreProducto,
           cantidad: item.cantidad,
           precio: item.producto.precio,
@@ -135,7 +136,12 @@ export class PedidosCarrito implements OnInit {
         //Crear objeto pedido
         const pedido: IPedidos = {
           fechaPedido: new Date(),
-          datosEntrega: this.frmDatosEntrega.value,
+          datosEntrega: {
+            idCliente: '1',
+            cliente: this.frmDatosEntrega.value.cliente,
+            telefono: this.frmDatosEntrega.value.telefono,
+            direccion: this.frmDatosEntrega.value.direccion,
+          },
           items: itemsPedido,
           total: this.carritoService.calcularTotal(),
         };
