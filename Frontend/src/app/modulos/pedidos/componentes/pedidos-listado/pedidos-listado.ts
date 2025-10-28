@@ -6,6 +6,7 @@ import { PageChangedEvent, PaginationModule } from 'ngx-bootstrap/pagination';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PedidosDetalle } from '../pedidos-detalle/pedidos-detalle';
+import { LoginService } from '../../../login/servicios/login.service';
 
 @Component({
   selector: 'app-pedidos-listado',
@@ -16,6 +17,7 @@ import { PedidosDetalle } from '../pedidos-detalle/pedidos-detalle';
 export class PedidosListado implements OnInit {
   private pedidoService = inject(PedidosService);
   private toastr = inject(ToastrService);
+  private loginService = inject(LoginService);
   @ViewChild('modalDetallesPedido') formModal!: PedidosDetalle;
 
   public pedidos: IPedidos[] = [];
@@ -30,9 +32,12 @@ export class PedidosListado implements OnInit {
   }
 
   cargarPedidos() {
+    const cliente = this.loginService.getClienteActual();
+    if (!cliente) return;
+
     this.pedidoService.mostrarTodos().subscribe({
       next: (res) => {
-        this.pedidos = res;
+        this.pedidos = res.filter((p) => p.datosEntrega.idCliente === cliente.id);
         this.totalItems = this.pedidos.length;
         this.registroPaginado = this.pedidos.slice(0, this.pageItems);
       },

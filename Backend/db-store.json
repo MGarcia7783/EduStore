@@ -205,6 +205,37 @@
         }
       ],
       "total": 140.87
+    },
+    {
+      "id": "e703",
+      "fechaPedido": "2025-10-28T01:20:35.618Z",
+      "datosEntrega": {
+        "idCliente": "2",
+        "cliente": "Ana López",
+        "telefono": "+505 84561234",
+        "direccion": "Rivas, Bo. Eduardo Alvarado, de la iglesia San Francisco 2c al sur."
+      },
+      "items": [
+        {
+          "idProducto": "a1b2",
+          "producto": "Borrador de leche",
+          "cantidad": 1,
+          "precio": 0.27
+        },
+        {
+          "idProducto": "b2c3",
+          "producto": "Lápiceros Deli",
+          "cantidad": 1,
+          "precio": 0.54
+        },
+        {
+          "idProducto": "c3d4",
+          "producto": "Cuaderno universitario",
+          "cantidad": 1,
+          "precio": 3.25
+        }
+      ],
+      "total": 4.0600000000000005
     }
   ]
 }

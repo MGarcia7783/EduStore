@@ -1,0 +1,43 @@
+<div class="container d-flex align-items-center justify-content-center vh-100">
+  <div class="card shadow-lg border-0 rounded-4 p-4" style="width: 400px">
+    <div class="text-center mb-4 mt-4">
+      <h3 class="text-primary fw-bold">Iniciar Sesión</h3>
+      <p class="text-muted small">Ingrese su email y contraseña para continuar</p>
+    </div>
+
+    <form [formGroup]="frmLogin">
+      <div class="form-floating mb-4">
+        <input
+          type="email"
+          formControlName="email"
+          class="form-control"
+          autocomplete="email"
+          [ngClass]="{
+            'is-invalid': frmLogin.get('email')?.invalid && frmLogin.get('email')?.touched
+          }"
+        />
+        <label for="email" class="bi bi-envelope-fill me-2"> Email</label>
+        <div class="invalid-feedback">Ingrese un email válido.</div>
+      </div>
+      <div class="form-floating mb-4">
+        <input
+          type="password"
+          formControlName="password"
+          class="form-control"
+          autocomplete="password"
+          [ngClass]="{
+            'is-invalid': frmLogin.get('password')?.invalid && frmLogin.get('password')?.touched
+          }"
+        />
+        <label for="password" class="bi bi-lock-fill me-2"> Contraseña</label>
+        <div class="invalid-feedback">Debe especificar la contraseña.</div>
+      </div>
+
+      <div class="d-grid mb-3 mt-4">
+        <button type="submit" class="btn btn-primary rounded-3 py-2 fw-semibold" (click)="login()">
+          Entrar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

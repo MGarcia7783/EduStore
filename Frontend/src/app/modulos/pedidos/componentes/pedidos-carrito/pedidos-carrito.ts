@@ -16,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { PedidosService } from '../../servicios/pedidos.service';
 import { IPedidos } from '../../modelos/ipedidos';
+import { LoginService } from '../../../login/servicios/login.service';
 
 @Component({
   selector: 'app-pedidos-carrito',
@@ -29,6 +30,7 @@ export class PedidosCarrito implements OnInit {
   private toastr = inject(ToastrService);
   private router = inject(Router);
   private fb = inject(FormBuilder);
+  private loginService = inject(LoginService);
   carritoItems: Carrito[] = [];
 
   @ViewChildren('input') inputs!: QueryList<ElementRef>;
@@ -40,6 +42,7 @@ export class PedidosCarrito implements OnInit {
   ngOnInit(): void {
     this.obtenerCarrito();
     this.createFormDatosEntrega();
+    this.cargarDatosCliente();
   }
 
   obtenerCarrito() {
@@ -109,11 +112,14 @@ export class PedidosCarrito implements OnInit {
     }
 
     if (this.carritoItems.length === 0) {
-      this.toastr.warning('Pro favor agrega productos antes de procesar la compra.', 'Validación', {
+      this.toastr.warning('Por favor agrega productos antes de procesar la compra.', 'Validación', {
         timeOut: 5000,
       });
       return;
     }
+
+    const cliente = this.loginService.getClienteActual();
+
     Swal.fire({
       title: 'Confirmar',
       html: '¿Está seguro de procesar la compra?',
@@ -137,7 +143,7 @@ export class PedidosCarrito implements OnInit {
         const pedido: IPedidos = {
           fechaPedido: new Date(),
           datosEntrega: {
-            idCliente: '1',
+            idCliente: cliente?.id ?? 0,
             cliente: this.frmDatosEntrega.value.cliente,
             telefono: this.frmDatosEntrega.value.telefono,
             direccion: this.frmDatosEntrega.value.direccion,
@@ -152,6 +158,7 @@ export class PedidosCarrito implements OnInit {
             this.toastr.success('Pedido procesado correctamente.', 'Información');
             this.carritoService.limpiarCarrito();
             this.frmDatosEntrega.reset();
+            this.cargarDatosCliente();
             this.obtenerCarrito();
           },
           error: () => {
@@ -160,5 +167,15 @@ export class PedidosCarrito implements OnInit {
         });
       }
     });
+  }
+
+  cargarDatosCliente() {
+    const cliente = this.loginService.getClienteActual();
+    if (cliente) {
+      this.frmDatosEntrega.patchValue({
+        cliente: cliente.nombreCliente,
+        telefono: cliente.telefono,
+      });
+    }
   }
 }
