@@ -50,26 +50,24 @@ export class PedidosCarrito implements OnInit {
   }
 
   eliminarProducto(index: number, nombreProducto: string) {
-    Swal.fire({
-      title: 'Alerta',
-      html: `¿Está seguro de eliminar el producto: <strong>${nombreProducto}</strong>?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#0d6efd',
-      cancelButtonColor: '#d33',
-      confirmButtonText: '¡Sí, elimínalo!',
-      cancelButtonText: '¡No, cancela!',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const eliminado = this.carritoService.eliminarItem(index);
+    const mensaje = `¿Está seguro de eliminar el producto: <strong>${nombreProducto}</strong>?<br/><small>Haga clic en esta notificación para confirmar.</small>`;
+    const toast = this.toastr.warning(mensaje, 'Alerta', {
+      enableHtml: true,
+      timeOut: 8000,
+      closeButton: true,
+      tapToDismiss: false,
+    });
 
-        if (eliminado) {
-          this.toastr.success('Registro eliminado con éxito', 'Información');
-        } else {
-          this.toastr.error('Error al eliminar el registro', 'Error', { timeOut: 5000 });
-        }
-        this.obtenerCarrito();
+    const sub = toast.onTap?.subscribe(() => {
+      sub?.unsubscribe();
+      const eliminado = this.carritoService.eliminarItem(index);
+
+      if (eliminado) {
+        this.toastr.success('Registro eliminado con éxito', 'Información');
+      } else {
+        this.toastr.error('Error al eliminar el registro', 'Error', { timeOut: 5000 });
       }
+      this.obtenerCarrito();
     });
   }
 
