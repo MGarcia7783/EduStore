@@ -1,5 +1,5 @@
 
 export const environment = {
   production: true,
-  API_BASE_URL: 'https://edustore.onrender.com',
+  API_BASE_URL: 'https://edustore.onrender.com/',
 };
