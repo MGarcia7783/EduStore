@@ -1,0 +1,14 @@
+# Archivo: render.yaml
+services:
+  # El primer servicio (Frontend)
+  - type: web
+    name: edustore-frontend # (Usa el nombre real de tu servicio Frontend)
+    rootDir: Frontend
+    staticPublishPath: dist/Frontend
+    # Habilitar reescritura de rutas
+    pullRequest:
+      autoDeploy: true
+    routes:
+      - type: rewrite
+        source: /.* # ¡Asegúrate de que comienza con /.*
+        destination: /index.html
