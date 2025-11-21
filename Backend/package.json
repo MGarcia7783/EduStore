@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "npx json-server --watch db-store.json --host 0.0.0.0 --port $PORT --static ."
+    "start": "npx json-server --watch db-store.json --host 0.0.0.0 --port $PORT"
   },
   "dependencies": {
     "json-server": "^1.0.0-beta.3"
