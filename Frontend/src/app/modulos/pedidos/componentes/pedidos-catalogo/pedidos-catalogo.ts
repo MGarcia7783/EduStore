@@ -5,7 +5,6 @@ import { IProductos } from '../../../productos/modelos/iproductos';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PageChangedEvent, PaginationComponent } from 'ngx-bootstrap/pagination';
 import { CarritoService } from '../../servicios/carrito.service';
-import Swal from 'sweetalert2';
 import { CurrencyPipe } from '@angular/common';
 
 @Component({
@@ -81,19 +80,17 @@ export class PedidosCatalogo implements OnInit {
     const agregado = this.carritoService.agregarProductoCarrito(item);
 
     if (agregado === 'nuevo') {
-      Swal.fire({
-        title: '¡Agregado con éxito!',
-        html: `El producto : "${item.nombreProducto}" se agregó al carrito`,
-        icon: 'success',
-        confirmButtonText: 'Aceptar',
-      });
+      this.toastr.success(
+        `El producto: "${item.nombreProducto}" se agregó al carrito`,
+        '¡Agregado con éxito!',
+        { timeOut: 4000, closeButton: true }
+      );
     } else if (agregado === 'duplicado') {
-      Swal.fire({
-        title: '¡Producto duplicado!',
-        html: `El producto : "${item.nombreProducto}" ya está en tu carrito`,
-        icon: 'warning',
-        confirmButtonText: 'Aceptar',
-      });
+      this.toastr.warning(
+        `El producto: "${item.nombreProducto}" ya está en tu carrito`,
+        '¡Producto duplicado!',
+        { timeOut: 4000, closeButton: true }
+      );
     }
   }
 }
